@@ -1,12 +1,26 @@
-import java.applet.Applet;
+package dyemixer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.Vector;
 
-public class DyeMixer extends Applet {
+public class DyeMixer extends javax.swing.JFrame {
 
     boolean failed = false;
+
+    double[] set_dyeamounts = new double[nummixeddyes];
+    int set_indexlight;
+    static Light light, canvasedlight;
+    int set_indexcanvas;
+    int[] set_indexdyes = new int[nummixeddyes];
+    boolean set_lightwhite = true;
+    boolean set_canvaswhite = false;
+    boolean set_canvasbright = false;
+    boolean set_combinedbright = false;
+    boolean set_dyeenables[] = new boolean[nummixeddyes];
+
+    static Spectrum spectrum;
 
     static interface Spectrum {
         public double get(double wavelen);
@@ -219,7 +233,7 @@ public class DyeMixer extends Applet {
                     int height = g.getFontMetrics().getAscent() - g.getFontMetrics().getDescent();
                     g.drawString(info, (int) ((getSize().width - width) / 2), (int) ((getSize().height + height) / 2));
                     if (light != null) {
-                        spectrax =
+                        // spectrax =
                     }
                 }
             }
@@ -1115,7 +1129,7 @@ public class DyeMixer extends Applet {
         ui_canvas.select(set_indexcanvas);
     }
 
-    // Implement event listeners in inner classes so that DyeMixer
+    // Implement event listeners in inner classes so that dyemixer.DyeMixer
     // itself need not publicly implement these interfaces.  Listening
     // to these events is an implementation detail.
 
@@ -1417,16 +1431,6 @@ public class DyeMixer extends Applet {
         return x;
     }
 
-    double[] set_dyeamounts = new double[nummixeddyes];
-    int set_indexlight;
-    Light light, canvasedlight;
-    int set_indexcanvas;
-    int[] set_indexdyes = new int[nummixeddyes];
-    boolean set_lightwhite = true;
-    boolean set_canvaswhite = false;
-    boolean set_canvasbright = false;
-    boolean set_combinedbright = false;
-    boolean set_dyeenables[] = new boolean[nummixeddyes];
 
     Choice ui_light;
     Choice ui_canvas;
@@ -1445,6 +1449,12 @@ public class DyeMixer extends Applet {
 
     DyeSliderListener[] listen_dyesliders = new DyeSliderListener[nummixeddyes];
     DyeAmountListener[] listen_dyeamounts = new DyeAmountListener[nummixeddyes];
+
+    public static void main(String args[]) {
+        DyeMixer d = new DyeMixer();
+        d.init();
+        d.setVisible(true);
+    }
 
     public void init() {
         GridBagConstraints c;
@@ -2288,5 +2298,5 @@ public class DyeMixer extends Applet {
 
 // FOR EMACS!!!
 // Local Variables:
-// compile-command: "javac -target 1.1 DyeMixer.java"
+// compile-command: "javac -target 1.1 dyemixer.DyeMixer.java"
 // End:
