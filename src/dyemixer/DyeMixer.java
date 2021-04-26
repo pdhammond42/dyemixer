@@ -1,5 +1,6 @@
 package dyemixer;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -1451,8 +1452,18 @@ public class DyeMixer extends javax.swing.JFrame {
     DyeAmountListener[] listen_dyeamounts = new DyeAmountListener[nummixeddyes];
 
     public static void main(String args[]) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException
+                |InstantiationException
+                |IllegalAccessException
+                |UnsupportedLookAndFeelException e) {
+            System.out.println(e.getMessage());
+        }
         DyeMixer d = new DyeMixer();
+        d.setDefaultCloseOperation(EXIT_ON_CLOSE);
         d.init();
+        d.setSize(820,520);
         d.setVisible(true);
     }
 
