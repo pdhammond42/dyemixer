@@ -1,0 +1,28 @@
+<project>
+
+    <target name="clean">
+        <delete dir="target"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="target/classes"/>
+        <javac srcdir="src" destdir="target/classes"/>
+        <copy todir="target/classes">
+            <fileset dir="resources"/>
+        </copy>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="target/jar"/>
+        <jar destfile="target/jar/dyemixer.jar" basedir="target/classes">
+            <manifest>
+                <attribute name="Main-Class" value="dyemixer.DyeMixer"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="jar">
+        <java jar="target/jar/dyemixer.jar" fork="true"/>
+    </target>
+
+</project>
